@@ -9,11 +9,11 @@
 ## 二、安装
   
 * Windows
-  * 点击[下载](https://gitee.com/Mannix1994/x-y/raw/master/bin/win/x-y%20setup.exe)下载软件，安装即可运行。
+  * 点击[下载](https://github.com/Mannix1994/PointsPicker/releases/download/V1.0/x-y.setup.exe)下载软件，安装即可运行。
 
 * Linux
     *  Ubuntu、Debian、Mint、Deepin均测试通过。系统要求为64位系统。
-    *  方法1、点击[下载](https://gitee.com/Mannix1994/x-y/raw/master/bin/linux/x-y-x86_64.AppImage)
+    *  方法1、点击[下载](https://github.com/Mannix1994/PointsPicker/releases/download/V1.0/x-y-x86_64.AppImage)
 下载软件，然后：
 	```
     # 添加运行权限
