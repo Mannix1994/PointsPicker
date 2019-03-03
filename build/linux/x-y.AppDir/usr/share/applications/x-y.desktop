@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=x-y
+Comment=坐标提取软件
+Exec=x-y
+Icon=x-y
+Categories=Office;
