@@ -16,10 +16,10 @@
   <widget class="QLabel" name="lbXy">
    <property name="geometry">
     <rect>
-     <x>870</x>
-     <y>15</y>
+     <x>960</x>
+     <y>10</y>
      <width>141</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
@@ -124,6 +124,22 @@
    </property>
    <property name="text">
     <string>放大倍数：</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbCopy">
+   <property name="geometry">
+    <rect>
+     <x>860</x>
+     <y>10</y>
+     <width>61</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>复制坐标到剪贴板</string>
+   </property>
+   <property name="text">
+    <string>复制</string>
    </property>
   </widget>
  </widget>

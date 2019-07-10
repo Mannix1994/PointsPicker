@@ -48,7 +48,7 @@ void PictureBox::updateTrackingCross(int value)
  */
 void PictureBox::setPenColor(QColor color)
 {
-    this->penColor = color;
+    this->m_penColor = color;
     //更新
     this->update();
 }
@@ -87,7 +87,7 @@ void PictureBox::paintEvent(QPaintEvent * event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
-    painter.setPen(penColor);
+    painter.setPen(m_penColor);
     painter.setBackground(m_brush);
 
     painter.eraseRect(rect());
@@ -163,7 +163,7 @@ void PictureBox::mousePressEvent(QMouseEvent *event){
         this->activateWindow(); //中键激活窗口
     }
     this->setMouseTracking(true);
-    emit clicked(this->getPointsString()); //发送被点击的信号
+    emit clicked(m_points); //发送被点击的信号
     emit clicked(x/m_scale,y/m_scale);
 }
 
@@ -209,25 +209,6 @@ void PictureBox::leaveEvent(QEvent *event)
     }
 }
 
-/**
- * @brief PictureBox::getPointsString 返回以","分割的坐标字符串
- * @return
- */
-QString PictureBox::getPointsString(){
-    if(m_points.isEmpty())
-        return "";
-    QString data;
-    QPoint p;
-    QString s;
-    for(int i=0;i<m_points.count();i++){
-        p = m_points[i];
-        s = QString("(%1,%2)").arg(p.x()).arg(p.y());
-        data += ";"+s; //以分号分割
-    }
-    data = data.mid(1);
-    return data;
-}
-
 QPixmap PictureBox::drawLocationCross(QVector<QPoint> &m_points,int scale)
 {
     //载入
@@ -237,7 +218,7 @@ QPixmap PictureBox::drawLocationCross(QVector<QPoint> &m_points,int scale)
     p  = p.scaled(p.size()*scale,Qt::KeepAspectRatio);
     //缩放
     QPainter painter(&p);//创建一个画笔
-    painter.setPen(penColor);
+    painter.setPen(m_penColor);
     painter.setBackground(m_brush);
     QVector<QLine> lines;
     int xMax = painter.window().width()-1;
@@ -292,7 +273,7 @@ void PictureBox::keyPressEvent(QKeyEvent *event){
         //绘制追踪十字
 //        m_paintMode = Tracking;
 //        this->update();
-        emit clicked(this->getPointsString()); //发送被点击之后点序列
+        emit clicked(m_points); //发送被点击之后点序列
         emit clicked(x/m_scale,y/m_scale);
         break;
     }
@@ -316,7 +297,7 @@ PictureBox::~PictureBox()
 QPixmap PictureBox::drawTrackingCross(QPixmap m_pixmap, int x, int y)
 {
     QPainter painter(&m_pixmap);//创建一个画笔
-    painter.setPen(penColor);
+    painter.setPen(m_penColor);
     painter.setBackground(m_brush);
     QVector<QLine> lines;
     int xMax = painter.window().width()-1;
@@ -333,7 +314,7 @@ QPixmap PictureBox::drawTrackingCross(QPixmap m_pixmap, int x, int y)
 QPixmap PictureBox::drawBorder(QPixmap m_pixmap)
 {
     QPainter painter(&m_pixmap);//创建一个画笔
-    painter.setPen(penColor);
+    painter.setPen(m_penColor);
     painter.setBackground(m_brush);
     QVector<QLine> lines;
     int xMax = painter.window().width()-1;

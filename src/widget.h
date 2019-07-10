@@ -22,7 +22,7 @@ class Widget : public QWidget
     Q_OBJECT
 
 public:
-    explicit Widget(QWidget *parent = 0);
+    explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
 private:
@@ -32,15 +32,18 @@ private:
     QString imagePath;
     void initialize();
 
+    static QString getPointsString(QVector<QPoint> &points);
 private slots:
     void setImage(QImage image);
     void setScaledImage(QImage image,int scale);
     void onScaleChanged(int scale);
     void onPointUpdated(int x,int y);
-    void onPointsStringChanged(QString s);
+    void onPointsChanged(QVector<QPoint> points);
     void setSizes(QSize imageSize);
     void on_pbChoosePic_clicked();
     void on_pbChooseColor_clicked();
+
+    void on_pbCopy_clicked();
 
 protected:
 //    void closeEvent(QCloseEvent *event);

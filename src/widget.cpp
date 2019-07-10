@@ -26,7 +26,7 @@ void Widget::initialize(){
     ui->lePoints->setReadOnly(true);
     //图片控件
     pictureBox = new PictureBox();
-    this->connect(pictureBox,SIGNAL(clicked(QString)),this,SLOT(onPointsStringChanged(QString)));
+    this->connect(pictureBox,SIGNAL(clicked(QVector<QPoint>)),this,SLOT(onPointsChanged(QVector<QPoint>)));
     this->connect(pictureBox,SIGNAL(mouseMoved(int,int)),this,SLOT(onPointUpdated(int,int)));
     this->connect(ui->scrollArea->verticalScrollBar(),SIGNAL(valueChanged(int)),
                   pictureBox,SLOT(updateTrackingCross(int)));
@@ -82,8 +82,24 @@ void Widget::onPointUpdated(int x, int y){
  * @brief Widget::onPointsStringChanged 接收PictureBox中发送过来的的坐标信息
  * @param s 坐标信息，以英文分号分割，demo:(1,1);(2,2)
  */
-void Widget::onPointsStringChanged(QString s){
-    ui->lePoints->setText(s.replace(";",","));
+void Widget::onPointsChanged(QVector<QPoint> points){
+    QString s = getPointsString(points);
+    ui->lePoints->setText(s);
+}
+
+QString Widget::getPointsString(QVector<QPoint> &points){
+    if(points.isEmpty())
+        return "";
+    QString data;
+    QPoint p;
+    QString s;
+    for(int i=0;i<points.count();i++){
+        p = points[i];
+        s = QString("(%1,%2)").arg(p.x()).arg(p.y());
+        data += ","+s; //以逗号分割
+    }
+    data = data.mid(1);
+    return data;
 }
 
 void Widget::setSizes(QSize imageSize)
@@ -186,7 +202,7 @@ void Widget::resizeEvent(QResizeEvent *e)
 void Widget::on_pbChoosePic_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this,
-                           tr("打开图片"),".",tr("图片 (*.jpg *.png *.bmp)"));
+                           tr("打开图片"),".",tr("图片 (*.jpg *.png *.bmp *.jpeg *.webp)")); // 图片格式
     if(!filename.isEmpty()){
         imagePath = filename;
         this->setImage(QImage(filename));//设置图片
@@ -204,4 +220,10 @@ void Widget::on_pbChooseColor_clicked()
     if(c.isValid())
         pictureBox->setPenColor(c);//修改追踪十字的颜色
     qDebug()<<c.isValid();
+}
+
+void Widget::on_pbCopy_clicked()
+{
+    QClipboard *clipboard = QApplication::clipboard();      //获取系统剪贴板指针
+    clipboard->setText(ui->lePoints->text());
 }
