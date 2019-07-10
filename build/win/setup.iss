@@ -2,10 +2,11 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "x-y"
-#define MyAppVersion "2.0"
+#define MyAppVersion "3.0"
 #define MyAppPublisher "SCU, Inc."
 #define MyAppURL "http://cs.scu.edu.cn"
 #define MyAppExeName "x-y.exe"
+#define BuildRoot "E:/wangmz/Projects/Qt/PointsPicker"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -21,9 +22,9 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=E:\wangmz\Projects\Qt\x-y\bin\win
+OutputDir={#BuildRoot}\bin\win
 OutputBaseFilename=x-y setup
-SetupIconFile=E:\wangmz\Projects\Qt\x-y\src\x-y.ico
+SetupIconFile={#BuildRoot}\src\x-y.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -34,17 +35,17 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\x-y.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\x-y.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "E:\wangmz\Projects\Qt\x-y\build\win\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildRoot}\build\win\x-y.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildRoot}\build\win\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildRoot}\build\win\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildRoot}\build\win\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildRoot}\build\win\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildRoot}\build\win\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildRoot}\build\win\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildRoot}\build\win\x-y.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildRoot}\build\win\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildRoot}\build\win\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildRoot}\build\win\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

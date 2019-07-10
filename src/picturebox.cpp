@@ -31,6 +31,7 @@ void PictureBox::setBackground(QBrush brush)
  */
 void PictureBox::updateTrackingCross(int value)
 {
+    Q_UNUSED(value);
     QPoint global = QCursor::pos();             //获取全局坐标
     QPoint local = this->mapFromGlobal(global); //转换为问控件的坐标
 
@@ -124,9 +125,6 @@ void PictureBox::paintEvent(QPaintEvent * event)
         painter.drawLines(lines);
         break;
     }
-
-    default:
-        break;
     }
 }
 
