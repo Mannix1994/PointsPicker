@@ -2,6 +2,7 @@
 #include "ui_widget.h"
 #include <QScrollBar>
 #include <QColorDialog>
+#include <QStandardPaths>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -83,20 +84,24 @@ void Widget::onPointUpdated(int x, int y){
  * @param s 坐标信息，以英文分号分割，demo:(1,1);(2,2)
  */
 void Widget::onPointsChanged(QVector<QPoint> points){
-    QString s = getPointsString(points);
+    _points = points;
+    QString s = getPointsString(points, ui->cbParenthesis->isChecked());
     ui->lePoints->setText(s);
 }
 
-QString Widget::getPointsString(QVector<QPoint> &points){
+QString Widget::getPointsString(QVector<QPoint> &points, bool parenthesis){
     if(points.isEmpty())
         return "";
     QString data;
-    QPoint p;
     QString s;
+    if (parenthesis)
+        s = QString("(%1,%2)");
+    else
+        s = QString("%1,%2");
     for(int i=0;i<points.count();i++){
-        p = points[i];
-        s = QString("(%1,%2)").arg(p.x()).arg(p.y());
-        data += ","+s; //以逗号分割
+        auto p = points[i];
+        auto temp = s.arg(p.x()).arg(p.y());
+        data += ","+temp; //以逗号分割
     }
     data = data.mid(1);
     return data;
@@ -201,8 +206,10 @@ void Widget::resizeEvent(QResizeEvent *e)
  */
 void Widget::on_pbChoosePic_clicked()
 {
+    // 获取主目录路径
+    QString home = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
     QString filename = QFileDialog::getOpenFileName(this,
-                           tr("打开图片"),".",tr("图片 (*.jpg *.png *.bmp *.jpeg *.webp)")); // 图片格式
+                           tr("打开图片"),home,tr("图片 (*.jpg *.png *.bmp *.jpeg *.webp)")); // 图片格式
     if(!filename.isEmpty()){
         imagePath = filename;
         this->setImage(QImage(filename));//设置图片
@@ -226,4 +233,16 @@ void Widget::on_pbCopy_clicked()
 {
     QClipboard *clipboard = QApplication::clipboard();      //获取系统剪贴板指针
     clipboard->setText(ui->lePoints->text());
+}
+
+void Widget::on_cbParenthesis_stateChanged(int arg1)
+{
+    qDebug() << arg1;
+    if (arg1 == Qt::Unchecked){
+        QString s = getPointsString(_points, false);
+        ui->lePoints->setText(s);
+    }else if(arg1 == Qt::Checked){
+        QString s = getPointsString(_points, true);
+        ui->lePoints->setText(s);
+    }
 }

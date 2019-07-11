@@ -30,9 +30,10 @@ private:
     PictureBox *pictureBox;
     bool showScrollBar;
     QString imagePath;
+    QVector<QPoint> _points;
     void initialize();
 
-    static QString getPointsString(QVector<QPoint> &points);
+    static QString getPointsString(QVector<QPoint> &points, bool parenthesis);
 private slots:
     void setImage(QImage image);
     void setScaledImage(QImage image,int scale);
@@ -44,6 +45,8 @@ private slots:
     void on_pbChooseColor_clicked();
 
     void on_pbCopy_clicked();
+
+    void on_cbParenthesis_stateChanged(int arg1);
 
 protected:
 //    void closeEvent(QCloseEvent *event);
