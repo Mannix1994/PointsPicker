@@ -237,7 +237,6 @@ void Widget::on_pbCopy_clicked()
 
 void Widget::on_cbParenthesis_stateChanged(int arg1)
 {
-    qDebug() << arg1;
     if (arg1 == Qt::Unchecked){
         QString s = getPointsString(_points, false);
         ui->lePoints->setText(s);

@@ -5,3 +5,4 @@ Comment=坐标提取软件
 Exec=x-y
 Icon=x-y
 Categories=Office;
+X-AppImage-Version=35b40a2
