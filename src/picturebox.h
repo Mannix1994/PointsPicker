@@ -37,7 +37,6 @@ private:
     QPixmap drawBorder(QPixmap m_pixmap);
     QPixmap drawLocationCross(QVector<QPoint>& m_points, int scale);
     QPixmap drawTrackingCross(QPixmap m_pixmap,int x,int y);
-
 protected:
     void paintEvent(QPaintEvent * event); //绘制事件
 

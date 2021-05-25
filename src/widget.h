@@ -31,8 +31,10 @@ private:
     bool showScrollBar;
     QString imagePath;
     QVector<QPoint> _points;
+    QStringList _images;
+    int _imageCurIndex = 0;
+    int firstOpenDir= 1;
     void initialize();
-
     static QString getPointsString(QVector<QPoint> &points, bool parenthesis);
 private slots:
     void setImage(QImage image);
@@ -48,6 +50,7 @@ private slots:
 
     void on_cbParenthesis_stateChanged(int arg1);
 
+    void on_pbNextPic_clicked();
 protected:
 //    void closeEvent(QCloseEvent *event);
 //    void enterEvent(QEvent *event);
