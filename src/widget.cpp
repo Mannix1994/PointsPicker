@@ -246,8 +246,8 @@ void Widget::on_pbSaveData_clicked()
    }
 
    QTextStream out(&file);//写入
-   if (!_images.isEmpty() && curImage < _images.size()) { // 批量图片
-    out << _images[curImage++];
+   if (!_images.isEmpty()) { // 批量图片
+    out << _images[_imageCurIndex-1];
     out << ",";
     out << ui->lePoints->text().toStdString().data();
     out << "\n";
