@@ -1,10 +1,10 @@
-##一、ubuntu下运行
-- $ ./x-y
+## 一、ubuntu下运行
+- ```$ ./x-y```
 
-##二、界面截图
-![截图](https://github.com/frdmu/PointsPicker/res/demo.png)
+## 二、界面截图
+![github](https://raw.github.com/frdmu/PointsPicker/master/res/demo.png "github")
 
-##三、操作说明
+## 三、操作说明
 - 批量图片：点击“批量图片”后，选择图片所在的文件夹即可；
             显示图片后，继续点击“批量图片”，可切换至下一张。
 - 绘制直线：点击“绘制直线”按钮后，鼠标左键点击两次，分别确定直线的端点后，即可绘制出直线。
@@ -13,5 +13,5 @@
               鼠标右键可取消刚刚文本框中获取的坐标。
 - 保存数据：点击“保存数据”按钮后，可将文本框中的数据保存到“/home/dataSet.txt”文件中，若图片从“批量图片”中获取，保存文件中还会保存图片路径。
 
-##四、感谢
--https://github.com/Mannix1994/PointsPicker 
+## 四、感谢
+- https://github.com/Mannix1994/PointsPicker 
