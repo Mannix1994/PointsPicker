@@ -58,7 +58,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>单张图片</string>
+    <string>选择图片</string>
    </property>
   </widget>
   <widget class="QScrollArea" name="scrollArea">

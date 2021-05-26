@@ -280,3 +280,8 @@ void Widget::on_pbNextPic_clicked()
     }
 }
 
+
+void Widget::on_pbDrawRectangle_clicked()
+{
+    pictureBox->drawRectangleFlag = 1;
+}

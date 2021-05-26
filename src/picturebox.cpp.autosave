@@ -270,7 +270,6 @@ QPixmap PictureBox::drawLocationCross(QVector<QPoint> &m_points,int scale)
 }
 QPixmap PictureBox::drawRect(QPoint startPoint, QPoint endPoint)
 {
-    //缩放
     QPainter painter(&m_pixmap);//创建一个画笔
     painter.setPen(m_penColor);
     painter.setBackground(m_brush);

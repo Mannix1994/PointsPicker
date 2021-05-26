@@ -21,6 +21,9 @@ public:
     explicit PictureBox(QWidget *parent = nullptr);
     void setPenColor(QColor color); //设置画笔颜色
     void scaleImage(int scale=1);        //设置缩放因子
+    int drawRectangleFlag = 0;
+    int releaseMouse = 1;
+    QPoint startPoint, endPoint;
     ~PictureBox();
 
 private:
@@ -37,6 +40,8 @@ private:
     QPixmap drawBorder(QPixmap m_pixmap);
     QPixmap drawLocationCross(QVector<QPoint>& m_points, int scale);
     QPixmap drawTrackingCross(QPixmap m_pixmap,int x,int y);
+
+    QPixmap drawRect(QPoint startPoint, QPoint endPoint);
 protected:
     void paintEvent(QPaintEvent * event); //绘制事件
 
@@ -54,6 +59,7 @@ public slots:
 protected:
     void mousePressEvent(QMouseEvent *event); //鼠标点击事件
     void mouseMoveEvent(QMouseEvent *event); //鼠标移动事件
+    void mouseReleaseEvent(QMouseEvent *event);
     void enterEvent(QEvent *event); //鼠标进入窗口事件
     void leaveEvent(QEvent *event); //鼠标离开窗口事件
     void keyPressEvent(QKeyEvent *event); //键盘点击事件

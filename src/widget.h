@@ -51,6 +51,8 @@ private slots:
     void on_cbParenthesis_stateChanged(int arg1);
 
     void on_pbNextPic_clicked();
+    void on_pbDrawRectangle_clicked();
+
 protected:
 //    void closeEvent(QCloseEvent *event);
 //    void enterEvent(QEvent *event);
