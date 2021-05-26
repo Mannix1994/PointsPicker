@@ -140,18 +140,14 @@ void PictureBox::mousePressEvent(QMouseEvent *event){
     y = event->y();
 
    if(event->button() == Qt::LeftButton && drawLineFlag){ // 绘制直线
-        qDebug("line");
-        qDebug("linepointnum:%d", linePointNum);
         if (linePointNum == 0) {
             linePointNum++;
-            qDebug("if linepointnum:%d", linePointNum);
             startPoint = event->pos();
         }
         else if (linePointNum == 1) {
             linePointNum++;
-            qDebug("ifffffffffffffffff linepointnum:%d", linePointNum);
             endPoint = event->pos();
-            qDebug("line:%d, %d , %d, %d\n", startPoint.x(), startPoint.y(), endPoint.x(), endPoint.y());
+
             m_pixmap = drawLine(startPoint, endPoint);
             m_paintMode = Tracking;
             this->update();
@@ -297,6 +293,9 @@ QPixmap PictureBox::drawRect(QPoint startPoint, QPoint endPoint)
     painter.setPen(m_penColor);
     painter.setBackground(m_brush);
     painter.drawRect(startPoint.x(), startPoint.y(), endPoint.x() - startPoint.x(), endPoint.y() - startPoint.y());
+
+    painter.drawLine(startPoint.x(), startPoint.y(), endPoint.x(), endPoint.y());
+    painter.drawLine(endPoint.x(), startPoint.y(), startPoint.x(), endPoint.y());
     return m_pixmap;
 }
 
