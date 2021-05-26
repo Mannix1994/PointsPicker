@@ -12,7 +12,9 @@
 #include <QWheelEvent>
 #include <QResizeEvent>
 #include "picturebox.h"
-
+#include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
 namespace Ui {
 class Widget;
 }
@@ -46,7 +48,7 @@ private slots:
     void on_pbChoosePic_clicked();
     void on_pbChooseColor_clicked();
 
-    void on_pbCopy_clicked();
+    void on_pbSaveData_clicked();
 
     void on_cbParenthesis_stateChanged(int arg1);
 

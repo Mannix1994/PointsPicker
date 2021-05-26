@@ -231,10 +231,24 @@ void Widget::on_pbChooseColor_clicked()
     qDebug()<<c.isValid();
 }
 
-void Widget::on_pbCopy_clicked()
+void Widget::on_pbSaveData_clicked()
 {
-    QClipboard *clipboard = QApplication::clipboard();      //获取系统剪贴板指针
-    clipboard->setText(ui->lePoints->text());
+   // QClipboard *clipboard = QApplication::clipboard();      //获取系统剪贴板指针
+   // clipboard->setText(ui->lePoints->text());
+   qDebug("copy:%s", ui->lePoints->text().toStdString().data());
+
+   QString home = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+   QFile file((home+ QString("/dataSet.txt")).toStdString().data());
+   if(!file.open(QIODevice::Append|QIODevice::Text))  //append追加，不会覆盖之前的文件
+   {
+       QMessageBox::critical(this,"错误","文件打开失败，信息没有保存！","确定");
+       return;
+   }
+
+   QTextStream out(&file);//写入
+   out << ui->lePoints->text().toStdString().data();
+   out << "\n";
+   file.close();
 }
 
 void Widget::on_cbParenthesis_stateChanged(int arg1)
@@ -288,7 +302,7 @@ void Widget::on_pbDrawRectangle_clicked()
 
 void Widget::on_pbDrawLine_clicked()
 {
-    pictureBox->drawLineFlag = 1;
+   pictureBox->drawLineFlag = 1;
 }
 
 void Widget::on_pbGetPointPos_clicked()

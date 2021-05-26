@@ -165,12 +165,12 @@
     <string>放大倍数：</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pbCopy">
+  <widget class="QPushButton" name="pbSaveData">
    <property name="geometry">
     <rect>
      <x>600</x>
      <y>10</y>
-     <width>61</width>
+     <width>71</width>
      <height>25</height>
     </rect>
    </property>
@@ -178,7 +178,7 @@
     <string>复制坐标到剪贴板</string>
    </property>
    <property name="text">
-    <string>复制</string>
+    <string>保存数据</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="cbParenthesis">
