@@ -235,7 +235,7 @@ void Widget::on_pbSaveData_clicked()
 {
    // QClipboard *clipboard = QApplication::clipboard();      //获取系统剪贴板指针
    // clipboard->setText(ui->lePoints->text());
-   qDebug("copy:%s", ui->lePoints->text().toStdString().data());
+   // qDebug("copy:%s", ui->lePoints->text().toStdString().data());
 
    QString home = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
    QFile file((home+ QString("/dataSet.txt")).toStdString().data());

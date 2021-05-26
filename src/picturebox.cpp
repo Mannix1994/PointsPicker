@@ -155,14 +155,12 @@ void PictureBox::mousePressEvent(QMouseEvent *event){
             linePointNum = 0;
             drawLineFlag = 0;
         }
-
-        qDebug("iffff linepointnum:%d", linePointNum);
    }
    else if(event->button() == Qt::LeftButton && drawRectangleFlag){ // 绘制矩形
         releaseMouse = 0;
         startPoint = event->pos();
         endPoint = event->pos();
-        qDebug("press:(%d, %d), (%d, %d)", startPoint.x(), startPoint.y(), endPoint.x(), endPoint.y());
+        //qDebug("press:(%d, %d), (%d, %d)", startPoint.x(), startPoint.y(), endPoint.x(), endPoint.y());
         return;
    }
    else if(event->button() == Qt::LeftButton && getPointPosFlag){ // 获取点坐标
