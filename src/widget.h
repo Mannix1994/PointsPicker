@@ -53,6 +53,8 @@ private slots:
     void on_pbNextPic_clicked();
     void on_pbDrawRectangle_clicked();
 
+    void on_pbDrawLine_clicked();
+
 protected:
 //    void closeEvent(QCloseEvent *event);
 //    void enterEvent(QEvent *event);

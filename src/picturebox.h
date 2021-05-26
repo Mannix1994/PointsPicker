@@ -22,6 +22,8 @@ public:
     void setPenColor(QColor color); //设置画笔颜色
     void scaleImage(int scale=1);        //设置缩放因子
     int drawRectangleFlag = 0;
+    int drawLineFlag = 0;
+    int linePointNum = 0;
     int releaseMouse = 1;
     QPoint startPoint, endPoint;
     ~PictureBox();
@@ -42,6 +44,7 @@ private:
     QPixmap drawTrackingCross(QPixmap m_pixmap,int x,int y);
 
     QPixmap drawRect(QPoint startPoint, QPoint endPoint);
+    QPixmap drawLine(QPoint startPoint, QPoint endPoint);
 protected:
     void paintEvent(QPaintEvent * event); //绘制事件
 

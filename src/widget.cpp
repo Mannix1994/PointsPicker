@@ -285,3 +285,8 @@ void Widget::on_pbDrawRectangle_clicked()
 {
     pictureBox->drawRectangleFlag = 1;
 }
+
+void Widget::on_pbDrawLine_clicked()
+{
+    pictureBox->drawLineFlag = 1;
+}
