@@ -34,6 +34,7 @@ private:
     QString imagePath;
     QVector<QPoint> _points;
     QStringList _images;
+    int curImage = 0;
     int _imageCurIndex = 0;
     int firstOpenDir= 1;
     void initialize();

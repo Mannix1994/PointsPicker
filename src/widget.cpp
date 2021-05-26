@@ -208,10 +208,10 @@ void Widget::on_pbChoosePic_clicked()
 {
     // 获取主目录路径
     QString home = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-    qDebug("%s\n", home.toStdString().data());
+    //qDebug("%s\n", home.toStdString().data());
     QString filename = QFileDialog::getOpenFileName(this,
                            tr("打开图片"),home,tr("图片 (*.jpg *.png *.bmp *.jpeg *.webp)")); // 图片格式
-    qDebug("%s\n", filename.toStdString().data());
+    //qDebug("%s\n", filename.toStdString().data());
     if(!filename.isEmpty()){
         imagePath = filename;
         this->setImage(QImage(filename));//设置图片
@@ -246,8 +246,15 @@ void Widget::on_pbSaveData_clicked()
    }
 
    QTextStream out(&file);//写入
-   out << ui->lePoints->text().toStdString().data();
-   out << "\n";
+   if (!_images.isEmpty() && curImage < _images.size()) { // 批量图片
+    out << _images[curImage++];
+    out << ",";
+    out << ui->lePoints->text().toStdString().data();
+    out << "\n";
+   } else { //单张图片
+    out << ui->lePoints->text().toStdString().data();
+    out << "\n";
+   }
    file.close();
 }
 
