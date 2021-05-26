@@ -23,6 +23,7 @@ public:
     void scaleImage(int scale=1);        //设置缩放因子
     int drawRectangleFlag = 0;
     int drawLineFlag = 0;
+    int getPointPosFlag = 0;
     int linePointNum = 0;
     int releaseMouse = 1;
     QPoint startPoint, endPoint;

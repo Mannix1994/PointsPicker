@@ -236,6 +236,19 @@
     </item>
    </layout>
   </widget>
+  <widget class="QPushButton" name="pbGetPointPos">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>40</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>获取点坐标</string>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

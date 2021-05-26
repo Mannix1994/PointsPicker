@@ -165,7 +165,7 @@ void PictureBox::mousePressEvent(QMouseEvent *event){
         qDebug("press:(%d, %d), (%d, %d)", startPoint.x(), startPoint.y(), endPoint.x(), endPoint.y());
         return;
    }
-   else if(event->button() == Qt::LeftButton){ //鼠标左键被点击
+   else if(event->button() == Qt::LeftButton && getPointPosFlag){ // 获取点坐标
         //存储当被点击的点
         m_points.append(QPoint(x/m_scale,y/m_scale));
         //绘制定位十字
@@ -173,6 +173,7 @@ void PictureBox::mousePressEvent(QMouseEvent *event){
         //绘制追踪十字
         m_paintMode = Tracking;
         this->update();
+        getPointPosFlag = 0;
     }
     else if(event->button() == Qt::RightButton){ //右键
         //删除最后一个点

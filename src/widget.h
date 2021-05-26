@@ -55,6 +55,8 @@ private slots:
 
     void on_pbDrawLine_clicked();
 
+    void on_pbGetPointPos_clicked();
+
 protected:
 //    void closeEvent(QCloseEvent *event);
 //    void enterEvent(QEvent *event);

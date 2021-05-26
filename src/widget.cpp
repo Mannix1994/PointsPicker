@@ -290,3 +290,8 @@ void Widget::on_pbDrawLine_clicked()
 {
     pictureBox->drawLineFlag = 1;
 }
+
+void Widget::on_pbGetPointPos_clicked()
+{
+    pictureBox->getPointPosFlag = 1;
+}
