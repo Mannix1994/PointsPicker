@@ -1,9 +1,0 @@
-# 在Ubuntu 16.04 下重新编译，在非共享目录下打包，才能正常运行
-
-export QT_ROOT=/home/creator/Apps/Qt5.12.3/5.12.3
-export PATH=$QT_ROOT/gcc_64/bin:$PATH
-export LD_LIBRARY_PATH=$QT_ROOT/gcc_64/lib:$LD_LIBRARY_PATH
-export QT_PLUGIN_PATH=$QT_ROOT/gcc_64/plugins:$QT_PLUGIN_PATH
-export QT_QPA_PLATFORM_PLUGIN_PATH=$QT_ROOT/gcc_64/plugins:$QT_QPA_PLATFORM_PLUGIN_PATH
-./linuxdeployqt x-y.AppDir/usr/share/applications/x-y.desktop -appimage
-

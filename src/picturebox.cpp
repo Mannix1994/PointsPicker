@@ -93,7 +93,6 @@ void PictureBox::paintEvent(QPaintEvent * event)
 
     painter.eraseRect(rect());
     painter.drawPixmap(0, 0, m_pixmap);
-
     switch (m_paintMode) {
     case Border:
     {
@@ -139,7 +138,32 @@ void PictureBox::mousePressEvent(QMouseEvent *event){
     this->setMouseTracking(false); //关闭鼠标追踪
     x = event->x();
     y = event->y();
-    if(event->button() == Qt::LeftButton){ //鼠标左键被点击
+
+   if(event->button() == Qt::LeftButton && drawLineFlag){ // 绘制直线
+        if (linePointNum == 0) {
+            linePointNum++;
+            startPoint = event->pos();
+        }
+        else if (linePointNum == 1) {
+            linePointNum++;
+            endPoint = event->pos();
+
+            m_pixmap = drawLine(startPoint, endPoint);
+            m_paintMode = Tracking;
+            this->update();
+
+            linePointNum = 0;
+            drawLineFlag = 0;
+        }
+   }
+   else if(event->button() == Qt::LeftButton && drawRectangleFlag){ // 绘制矩形
+        releaseMouse = 0;
+        startPoint = event->pos();
+        endPoint = event->pos();
+        //qDebug("press:(%d, %d), (%d, %d)", startPoint.x(), startPoint.y(), endPoint.x(), endPoint.y());
+        return;
+   }
+   else if(event->button() == Qt::LeftButton && getPointPosFlag){ // 获取点坐标
         //存储当被点击的点
         m_points.append(QPoint(x/m_scale,y/m_scale));
         //绘制定位十字
@@ -147,15 +171,16 @@ void PictureBox::mousePressEvent(QMouseEvent *event){
         //绘制追踪十字
         m_paintMode = Tracking;
         this->update();
+        getPointPosFlag = 0;
     }
     else if(event->button() == Qt::RightButton){ //右键
         //删除最后一个点
         if(m_points.size()>0){
             m_points.removeLast();
         }
-        m_pixmap = drawLocationCross(m_points,m_scale);
-        m_paintMode = Tracking;
-        this->update();
+        //m_pixmap = drawLocationCross(m_points,m_scale);
+        //m_paintMode = Tracking;
+        //this->update();
     }
     else if(event->button() ==Qt::MiddleButton){
         this->activateWindow(); //中键激活窗口
@@ -173,12 +198,28 @@ void PictureBox::mouseMoveEvent(QMouseEvent *event){
     if(m_pixmap.isNull()){
         return;
     }
+    if (drawRectangleFlag && !releaseMouse) {
+        endPoint = event->pos();
+        update();
+        return;
+    }
     x = event->x();
     y = event->y();
     //绘制定位十字
     m_paintMode = Tracking;
     this->update();
     emit mouseMoved(x/m_scale,y/m_scale); //send position
+}
+void PictureBox::mouseReleaseEvent(QMouseEvent *event) {
+    Q_UNUSED(event);
+    if (drawRectangleFlag) {
+        m_pixmap = drawRect(startPoint, endPoint);
+        m_paintMode = Tracking;
+        this->update();
+    }
+    drawRectangleFlag = 0;
+    releaseMouse = 1;
+    //qDebug("release:(%d, %d), (%d, %d)", startPoint.x(), startPoint.y(), endPoint.x(), endPoint.y());
 }
 
 /**
@@ -210,9 +251,15 @@ void PictureBox::leaveEvent(QEvent *event)
 QPixmap PictureBox::drawLocationCross(QVector<QPoint> &m_points,int scale)
 {
     //载入
-    QPixmap p(m_image_path);
-    if(p.isNull())
-        return QPixmap();
+    QPixmap p;
+    if (!m_pixmap) {
+        p = QPixmap(m_image_path);
+        if(p.isNull())
+            return QPixmap();
+    } else {
+        p = m_pixmap;
+    }
+
     p  = p.scaled(p.size()*scale,Qt::KeepAspectRatio);
     //缩放
     QPainter painter(&p);//创建一个画笔
@@ -225,7 +272,7 @@ QPixmap PictureBox::drawLocationCross(QVector<QPoint> &m_points,int scale)
         QPoint p = m_points[i];
         int x = p.x()*scale;
         int y = p.y()*scale;
-        this->update();
+        //this->update();
         int xMinP = (x-10)>0 ? (x-10):0;
         int xMaxP = (x+10)<xMax ? (x+10):xMax;
         int yMinP = (y-10)>0 ? (y-10):0;
@@ -239,7 +286,26 @@ QPixmap PictureBox::drawLocationCross(QVector<QPoint> &m_points,int scale)
     }
     return p;
 }
+QPixmap PictureBox::drawRect(QPoint startPoint, QPoint endPoint)
+{
+    QPainter painter(&m_pixmap);//创建一个画笔
+    painter.setPen(m_penColor);
+    painter.setBackground(m_brush);
+    painter.drawRect(startPoint.x(), startPoint.y(), endPoint.x() - startPoint.x(), endPoint.y() - startPoint.y());
 
+    painter.drawLine(startPoint.x(), startPoint.y(), endPoint.x(), endPoint.y());
+    painter.drawLine(endPoint.x(), startPoint.y(), startPoint.x(), endPoint.y());
+    return m_pixmap;
+}
+
+QPixmap PictureBox::drawLine(QPoint startPoint, QPoint endPoint)
+{
+    QPainter painter(&m_pixmap);//创建一个画笔
+    painter.setPen(m_penColor);
+    painter.setBackground(m_brush);
+    painter.drawLine(startPoint.x(), startPoint.y(), endPoint.x(), endPoint.y());
+    return m_pixmap;
+}
 
 /**
  * @brief PictureBox::keyPressEvent 键盘点击事件，通过方向键来控制追踪十字的位置，按回车键是添加该点

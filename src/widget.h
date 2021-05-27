@@ -12,7 +12,9 @@
 #include <QWheelEvent>
 #include <QResizeEvent>
 #include "picturebox.h"
-
+#include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
 namespace Ui {
 class Widget;
 }
@@ -31,8 +33,10 @@ private:
     bool showScrollBar;
     QString imagePath;
     QVector<QPoint> _points;
+    QStringList _images;
+    int _imageCurIndex = 0;
+    int firstOpenDir= 1;
     void initialize();
-
     static QString getPointsString(QVector<QPoint> &points, bool parenthesis);
 private slots:
     void setImage(QImage image);
@@ -44,9 +48,16 @@ private slots:
     void on_pbChoosePic_clicked();
     void on_pbChooseColor_clicked();
 
-    void on_pbCopy_clicked();
+    void on_pbSaveData_clicked();
 
     void on_cbParenthesis_stateChanged(int arg1);
+
+    void on_pbNextPic_clicked();
+    void on_pbDrawRectangle_clicked();
+
+    void on_pbDrawLine_clicked();
+
+    void on_pbGetPointPos_clicked();
 
 protected:
 //    void closeEvent(QCloseEvent *event);

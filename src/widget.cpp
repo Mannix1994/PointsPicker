@@ -208,8 +208,10 @@ void Widget::on_pbChoosePic_clicked()
 {
     // 获取主目录路径
     QString home = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    //qDebug("%s\n", home.toStdString().data());
     QString filename = QFileDialog::getOpenFileName(this,
                            tr("打开图片"),home,tr("图片 (*.jpg *.png *.bmp *.jpeg *.webp)")); // 图片格式
+    //qDebug("%s\n", filename.toStdString().data());
     if(!filename.isEmpty()){
         imagePath = filename;
         this->setImage(QImage(filename));//设置图片
@@ -229,10 +231,26 @@ void Widget::on_pbChooseColor_clicked()
     qDebug()<<c.isValid();
 }
 
-void Widget::on_pbCopy_clicked()
+void Widget::on_pbSaveData_clicked()
 {
-    QClipboard *clipboard = QApplication::clipboard();      //获取系统剪贴板指针
-    clipboard->setText(ui->lePoints->text());
+   // QClipboard *clipboard = QApplication::clipboard();      //获取系统剪贴板指针
+   // clipboard->setText(ui->lePoints->text());
+   // qDebug("copy:%s", ui->lePoints->text().toStdString().data());
+
+   QString home = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+   QFile file((home+ QString("/dataSet.txt")).toStdString().data());
+   if(!file.open(QIODevice::Append|QIODevice::Text))  //append追加，不会覆盖之前的文件
+   {
+       QMessageBox::critical(this,"错误","文件打开失败，信息没有保存！","确定");
+       return;
+   }
+
+   QTextStream out(&file);//写入
+   out << imagePath.toStdString().data();
+   out << ",";
+   out << ui->lePoints->text().toStdString().data();
+   out << "\n";
+   file.close();
 }
 
 void Widget::on_cbParenthesis_stateChanged(int arg1)
@@ -244,4 +262,52 @@ void Widget::on_cbParenthesis_stateChanged(int arg1)
         QString s = getPointsString(_points, true);
         ui->lePoints->setText(s);
     }
+}
+
+void Widget::on_pbNextPic_clicked()
+{
+    if (firstOpenDir) {
+        firstOpenDir = 0;
+        QString home = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+        QString dirname = QFileDialog::getExistingDirectory(this, "open a dir", home);
+        if (!dirname.isNull() && !dirname.isEmpty()){
+        QDir dir(dirname);
+        _images = dir.entryList(QStringList() << "*.jpg" << "*.png", QDir::Files);
+        _images.sort();
+        if (!dirname.endsWith('/')) dirname+="/";
+        QStringList tmp;
+            for (auto &image: _images){
+                tmp.push_back(dirname+image);
+            }
+            _images = tmp;
+        }
+
+    }
+    if (_imageCurIndex < _images.size()) {
+        QString filename = _images[_imageCurIndex++];
+        imagePath = filename;
+        this->setImage(QImage(filename));//设置图片
+    } else {
+        _imageCurIndex = 0;
+        QString filename = _images[_imageCurIndex++];
+        imagePath = filename;
+        this->setImage(QImage(filename));//设置图片
+
+    }
+}
+
+
+void Widget::on_pbDrawRectangle_clicked()
+{
+    pictureBox->drawRectangleFlag = 1;
+}
+
+void Widget::on_pbDrawLine_clicked()
+{
+   pictureBox->drawLineFlag = 1;
+}
+
+void Widget::on_pbGetPointPos_clicked()
+{
+    pictureBox->getPointPosFlag = 1;
 }
