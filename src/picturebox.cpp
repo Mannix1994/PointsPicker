@@ -174,10 +174,20 @@ void PictureBox::mousePressEvent(QMouseEvent *event){
         getPointPosFlag = 0;
     }
     else if(event->button() == Qt::RightButton){ //右键
-        //删除最后一个点
-        if(m_points.size()>0){
-            m_points.removeLast();
-        }
+       bool bRet = false;
+       //单文本输入框
+       QString text = QInputDialog::getText(this, "输入真实坐标",
+                       "x,y", QLineEdit::Normal, "", &bRet);
+       QStringList list = text.split(",");
+       if (bRet && !text.isEmpty())
+       {
+           qDebug() << "press ok text = " << list[0].toInt() << "," << list[1].toInt() << text;
+           real_points.append(QPoint(list[0].toInt(), list[1].toInt()));
+       }
+       else
+       {
+           qDebug() << "press Cancel text = " << text;
+       }
         //m_pixmap = drawLocationCross(m_points,m_scale);
         //m_paintMode = Tracking;
         //this->update();

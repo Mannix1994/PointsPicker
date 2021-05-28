@@ -28,7 +28,7 @@
   <widget class="QLabel" name="lbXy">
    <property name="geometry">
     <rect>
-     <x>670</x>
+     <x>700</x>
      <y>10</y>
      <width>131</width>
      <height>21</height>
@@ -41,9 +41,9 @@
   <widget class="QLineEdit" name="lePoints">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>302</x>
      <y>10</y>
-     <width>211</width>
+     <width>261</width>
      <height>25</height>
     </rect>
    </property>
@@ -58,7 +58,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>选择图片</string>
+    <string>单张图片</string>
    </property>
   </widget>
   <widget class="QScrollArea" name="scrollArea">
@@ -123,7 +123,7 @@
   <widget class="QPushButton" name="pbChooseColor">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>110</x>
      <y>10</y>
      <width>81</width>
      <height>25</height>
@@ -136,7 +136,7 @@
   <widget class="QSpinBox" name="sbScale">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>260</x>
      <y>10</y>
      <width>41</width>
      <height>22</height>
@@ -155,7 +155,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>200</x>
      <y>10</y>
      <width>61</width>
      <height>21</height>
@@ -168,7 +168,7 @@
   <widget class="QPushButton" name="pbSaveData">
    <property name="geometry">
     <rect>
-     <x>600</x>
+     <x>620</x>
      <y>10</y>
      <width>71</width>
      <height>25</height>
@@ -184,8 +184,8 @@
   <widget class="QCheckBox" name="cbParenthesis">
    <property name="geometry">
     <rect>
-     <x>550</x>
-     <y>10</y>
+     <x>566</x>
+     <y>12</y>
      <width>51</width>
      <height>21</height>
     </rect>
@@ -214,9 +214,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>40</y>
-     <width>254</width>
-     <height>33</height>
+     <y>42</y>
+     <width>191</width>
+     <height>31</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -239,14 +239,27 @@
   <widget class="QPushButton" name="pbGetPointPos">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>40</y>
-     <width>121</width>
+     <x>208</x>
+     <y>42</y>
+     <width>81</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>获取点坐标</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbDeletePointsPos">
+   <property name="geometry">
+    <rect>
+     <x>296</x>
+     <y>42</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除坐标显示</string>
    </property>
   </widget>
  </widget>

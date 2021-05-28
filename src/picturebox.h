@@ -13,6 +13,7 @@
 #include <QStack>
 #include <QStringList>
 #include <QDebug>
+#include <QInputDialog>
 
 class PictureBox : public QWidget
 {
@@ -27,6 +28,8 @@ public:
     int linePointNum = 0;
     int releaseMouse = 1;
     QPoint startPoint, endPoint;
+    QVector<QPoint> m_points;   //存储历次被点击的坐标
+    QVector<QPoint> real_points;   //真实的点坐标
     ~PictureBox();
 
 private:
@@ -39,7 +42,6 @@ private:
     QBrush m_brush;         //
     QColor m_penColor;      //坐标，追踪十字的颜色
     int x,y;                //当前被鼠标点击的点的x,y坐标
-    QVector<QPoint> m_points;   //存储历次被点击的坐标
     QPixmap drawBorder(QPixmap m_pixmap);
     QPixmap drawLocationCross(QVector<QPoint>& m_points, int scale);
     QPixmap drawTrackingCross(QPixmap m_pixmap,int x,int y);

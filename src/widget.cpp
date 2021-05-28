@@ -246,9 +246,13 @@ void Widget::on_pbSaveData_clicked()
    }
 
    QTextStream out(&file);//写入
-   out << imagePath.toStdString().data();
-   out << ",";
-   out << ui->lePoints->text().toStdString().data();
+   out << imagePath.toStdString().data(); // 文件路径
+   out << "|";
+   out << ui->lePoints->text().toStdString().data(); // 像素坐标
+   out << "|";
+   QString s = getPointsString(pictureBox->real_points, 1); // 真实坐标
+   out << s.toStdString().data();
+   pictureBox->real_points.clear();
    out << "\n";
    file.close();
 }
@@ -311,3 +315,15 @@ void Widget::on_pbGetPointPos_clicked()
 {
     pictureBox->getPointPosFlag = 1;
 }
+
+void Widget::on_pbDeletePointsPos_clicked()
+{
+    //删除最后一个点
+    if(pictureBox->m_points.size()>0){
+        pictureBox->m_points.removeLast();
+    }
+
+    QString s = getPointsString(pictureBox->m_points, 1);
+    ui->lePoints->setText(s);
+}
+
