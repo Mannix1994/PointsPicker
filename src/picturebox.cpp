@@ -177,12 +177,13 @@ void PictureBox::mousePressEvent(QMouseEvent *event){
        bool bRet = false;
        //单文本输入框
        QString text = QInputDialog::getText(this, "输入真实坐标",
-                       "x,y", QLineEdit::Normal, "", &bRet);
+                       "x,y,z", QLineEdit::Normal, "", &bRet);
        QStringList list = text.split(",");
        if (bRet && !text.isEmpty())
        {
-           qDebug() << "press ok text = " << list[0].toInt() << "," << list[1].toInt() << text;
-           real_points.append(QPoint(list[0].toInt(), list[1].toInt()));
+           //qDebug() << "press ok text = " << list[0].toInt() << "," << list[1].toInt() << "," << list[2].toInt() << text;
+           real_points.append(QPoint3d(list[0].toInt(), list[1].toInt(), list[2].toInt()));
+           //qDebug("%d", real_points.back().x());
        }
        else
        {

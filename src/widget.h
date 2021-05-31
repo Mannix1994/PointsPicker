@@ -12,6 +12,7 @@
 #include <QWheelEvent>
 #include <QResizeEvent>
 #include "picturebox.h"
+#include "qpoint3d.h"
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
@@ -38,6 +39,7 @@ private:
     int firstOpenDir= 1;
     void initialize();
     static QString getPointsString(QVector<QPoint> &points, bool parenthesis);
+    static QString getRealPointsString(QVector<QPoint3d> &points, bool parenthesis);
 private slots:
     void setImage(QImage image);
     void setScaledImage(QImage image,int scale);

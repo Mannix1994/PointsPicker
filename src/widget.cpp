@@ -106,6 +106,24 @@ QString Widget::getPointsString(QVector<QPoint> &points, bool parenthesis){
     data = data.mid(1);
     return data;
 }
+QString Widget::getRealPointsString(QVector<QPoint3d> &points, bool parenthesis){
+    if(points.isEmpty())
+        return "";
+    QString data;
+    QString s;
+    if (parenthesis)
+        s = QString("(%1,%2,%3)");
+    else
+        s = QString("%1,%2,%3");
+    for(int i=0;i<points.count();i++){
+        auto p = points[i];
+        auto temp = s.arg(p.x()).arg(p.y()).arg(p.z());
+        //qDebug("%s", temp.toStdString().data());
+        data += ","+temp; //以逗号分割
+    }
+    data = data.mid(1);
+    return data;
+}
 
 void Widget::setSizes(QSize imageSize)
 {
@@ -250,7 +268,7 @@ void Widget::on_pbSaveData_clicked()
    out << "|";
    out << ui->lePoints->text().toStdString().data(); // 像素坐标
    out << "|";
-   QString s = getPointsString(pictureBox->real_points, 1); // 真实坐标
+   QString s = getRealPointsString(pictureBox->real_points, 1); // 真实坐标
    out << s.toStdString().data();
    pictureBox->real_points.clear();
    out << "\n";

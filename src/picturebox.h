@@ -14,7 +14,7 @@
 #include <QStringList>
 #include <QDebug>
 #include <QInputDialog>
-
+#include "qpoint3d.h"
 class PictureBox : public QWidget
 {
     Q_OBJECT
@@ -29,7 +29,7 @@ public:
     int releaseMouse = 1;
     QPoint startPoint, endPoint;
     QVector<QPoint> m_points;   //存储历次被点击的坐标
-    QVector<QPoint> real_points;   //真实的点坐标
+    QVector<QPoint3d> real_points;   //真实的点坐标
     ~PictureBox();
 
 private:

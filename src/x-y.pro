@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    picturebox.cpp
+    picturebox.cpp \
+    qpoint3d.cpp
 
 HEADERS  += widget.h \
-    picturebox.h
+    picturebox.h \
+    qpoint3d.h
 
 FORMS    += widget.ui
 
